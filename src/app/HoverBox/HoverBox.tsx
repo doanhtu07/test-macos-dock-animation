@@ -4,8 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import BoxItem from "./BoxItem";
 
 export default function HoverBox() {
+  const minWidth = 40;
+  const maxWidth = 60;
+  const distanceMagnify = 140;
+
   const boxRef = useRef<HTMLDivElement>(null);
-  const [diffs, setDiffs] = useState<number[]>([0, 0, 0, 0]);
+
+  const [diffs, setDiffs] = useState<number[]>(Array(4).fill(distanceMagnify));
 
   useEffect(() => {
     const box = boxRef.current;
@@ -38,7 +43,7 @@ export default function HoverBox() {
         }
         setDiffs(newDiffs);
       } else {
-        setDiffs([0, 0, 0, 0]);
+        setDiffs(Array(4).fill(distanceMagnify));
       }
     };
 
@@ -66,9 +71,9 @@ export default function HoverBox() {
         {diffs.map((diff, i) => (
           <BoxItem
             key={i}
-            minWidth={40}
-            maxWidth={60}
-            distanceMagnify={140}
+            minWidth={minWidth}
+            maxWidth={maxWidth}
+            distanceMagnify={distanceMagnify}
             diff={diff}
           />
         ))}
